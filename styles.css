@@ -1,0 +1,19 @@
+p {
+    margin-bottom : 5px;
+}
+
+.info span {
+    display: block;
+}
+
+#sold {
+    color : hsl(132, 100%, 33%);
+}
+
+#purchased {
+    color: hsl(238, 100%, 50%);
+}
+
+#stock {
+    color: hsl(0, 100%, 50%);
+}
