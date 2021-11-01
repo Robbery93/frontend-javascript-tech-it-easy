@@ -251,23 +251,45 @@ brandFunctionElement.textContent = tvBrandFunction(inventory);
 
 // Opdracht 5
 // 5a
-const tvName = (tvArray) => tvArray.brand + " " + tvArray.type + " - " + tvArray.name;
-
-const nameElement = document.getElementById("name");
-nameElement.textContent = tvName(inventory[0]);
+const tvName = (tv) => tv.brand + " " + tv.type + " - " + tv.name;
 
 // 5b
-const tvPrice = (tvArray) => "€" + tvArray.price + ",-";
-
-const priceElement = document.getElementById("price");
-priceElement.textContent = tvPrice(inventory[0]);
+const tvPrice = (tv) => "€" + tv.price + ",-";
 
 // 5c
-const availableSizes = (tvArray) => {
+const availableSizes = (tvSizes) => {
+  let renderSizes = "";
+  for (let j = 0; j < tvSizes.length; j++) {
+      renderSizes += tvSizes[j] + " inch (" + (tvSizes[j] * 2.54) + " cm) | ";
+  }
+  renderSizes = renderSizes.substring(0, (renderSizes.length - 3))
+  return renderSizes;
+}
+
+// 5d
+const showTV = (tv) => {
+  const nameElement = document.getElementById("name");
+  nameElement.textContent = tvName(inventory[tv]);
+
+  const priceElement = document.getElementById("price");
+  priceElement.textContent = tvPrice(inventory[tv]);
+
+  const sizesElement = document.getElementById("sizes");
+  sizesElement.textContent = availableSizes(inventory[tv].availableSizes);
+}
+showTV(0);
+
+// 5e
+const renderAllTvs  = (tvArray) => {
+  const allTvsElement = document.getElementById('all-tvs')
+  for (let i = 0; i < tvArray.length; i++) {
+    const render = document.createElement("p");
+    allTvsElement.appendChild(render);
+    render.innerHTML = tvName(tvArray[i]);
+    render.innerHTML += "<br/>" + tvPrice(tvArray[i]);
+    render.innerHTML += "<br/>" + availableSizes(tvArray[i].availableSizes)
   }
 }
 
-console.log(availableSizes(inventory[5]))
+renderAllTvs(inventory);
 
-const sizesElement = document.getElementById("sizes");
-sizesElement.textContent = availableSizes(inventory[5]);
